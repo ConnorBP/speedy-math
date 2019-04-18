@@ -75,7 +75,7 @@ jobs:
       name: "Clippy and Formatting"
       before_script:
         - rustup component add rustfmt-preview
-        - cargo install clippy
+        - rustup component add clippy-preview
       script: cargo fmt -- --check; cargo clippy -- -D clippy::all
     - script: cargo test --verbose
       name: "Running Tests"
