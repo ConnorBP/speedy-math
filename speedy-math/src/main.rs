@@ -80,6 +80,37 @@ mod tests {
         //TODO CHECK FOR VALID OUTPUT
         assert!(true);
     }
+
+    #[test]
+    fn fast_between_benchmark() {
+        //needs to be run with cargo test -- --nocapture
+        
+        //this one is needed to make sure the results after are fair.
+        //The first one seems to always take longer because it has to initialize things
+        benchmarknamed! {
+            #[warmup_time]
+            for x in -100000..100000 {
+            slow_between(x, -4, 4);
+            };
+        }
+
+        benchmarknamed! {
+            #[slow_between]
+            for x in -1000..1000 {
+            slow_between(x, -4, 4);
+            };
+        }
+
+        benchmarknamed! {
+            #[fast_between]
+            for x in -1000..1000 {
+            fast_between(x, -4, 4);
+            };
+        }
+
+    }
+
+
     #[test]
     fn fast_between_is_correct() {
         for x in -10..10 {
