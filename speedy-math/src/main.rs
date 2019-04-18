@@ -89,22 +89,22 @@ mod tests {
         //The first one seems to always take longer because it has to initialize things
         benchmarknamed! {
             #[warmup_time]
-            for x in -100000..100000 {
+            for x in -1000..1000 {
             slow_between(x, -4, 4);
             };
         }
 
         benchmarknamed! {
             #[slow_between]
-            for x in -1000..1000 {
-            slow_between(x, -4, 4);
+            for x in 0..10000000 {
+                slow_between((x % 20) -10, -4, 4);
             };
         }
 
         benchmarknamed! {
             #[fast_between]
-            for x in -1000..1000 {
-            fast_between(x, -4, 4);
+            for x in 0..10000000 {
+                fast_between((x % 20) -10, -4, 4);
             };
         }
 
@@ -113,9 +113,10 @@ mod tests {
 
     #[test]
     fn fast_between_is_correct() {
-        for x in -10..10 {
-            let fast = fast_between(x, -4, 4);
-            let slow = slow_between(x, -4, 4);
+        for x in 0..1000 {
+            //wraps from -10 to 10 a lot of times
+            let fast = fast_between((x % 20) -10, -4, 4);
+            let slow = slow_between((x % 20) -10, -4, 4);
 
             assert_eq!(
                 fast, slow,
