@@ -1,4 +1,6 @@
-use std::time::{Instant};
+
+
+/* use std::time::{Instant};
 
 macro_rules! benchmark {
     ($($lines:stmt;)*) => {
@@ -22,7 +24,10 @@ macro_rules! namedbenchmark {
             let duration = start.elapsed();
             println!("{} time: {:?} | {}", stringify!($($name)?), duration, stringify!(args));
         };
-}
+} */
+#[macro_use]
+extern crate benchme;
+use std::time::{Instant};
 
 fn main() {
 
@@ -31,7 +36,7 @@ fn main() {
         println!("NANI!?!?!?!?");
     }
 
-    namedbenchmark! {
+    benchmarknamed! {
         #[weeeeeeee]
         println!("OwO notices 🚀");
         println!("the yeet was yote.");
@@ -52,4 +57,8 @@ fn fast_between(value : u16, lower : u16, upper : u16) -> bool {
     //let vnorm = value-upper;
     //if vnorm < ul && < lu
     (value-lower) as u16 <= (upper - lower)
+}
+
+fn sin_lut() {
+
 }

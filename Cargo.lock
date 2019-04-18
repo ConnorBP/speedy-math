@@ -9,6 +9,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "benchme"
+version = "0.1.0"
+
+[[package]]
 name = "proc-macro2"
 version = "0.4.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -27,6 +31,9 @@ dependencies = [
 [[package]]
 name = "speedy-math"
 version = "0.1.0"
+dependencies = [
+ "benchme 0.1.0",
+]
 
 [[package]]
 name = "syn"
