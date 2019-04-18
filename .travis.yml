@@ -71,20 +71,21 @@ before_cache:
 
 jobs:
   include:
-    - stage: "Tests"                # naming the Tests stage
-      name: "Clippy and Formatting"            # names the first Tests stage job
+    - stage: "Tests"
+      name: "Clippy and Formatting"
       before_script:
         - rustup component add rustfmt-preview
         - cargo install clippy
       script: cargo fmt -- --check; cargo clippy -- -D clippy::all
     - script: cargo test --verbose
-      name: "Running Tests"     # names the second Tests stage job
+      name: "Running Tests"
     - stage: build
-      name: "Build"
+      name: "Building"
       before_script:
-        - |
-            cargo install &&
-            export PATH=$HOME/.cargo/bin:$PATH
+        #this doesn't work for "virtual" manifests (workspace)
+        # - |
+        #     cargo install &&
+        #     export PATH=$HOME/.cargo/bin:$PATH
         - rustup self update
       script:
         - |
