@@ -44,7 +44,7 @@ fn main() {
 
 }
 
-fn fast_between(value : u16, lower : u16, upper : u16) -> bool {
+fn fast_between(value : i16, lower : i16, upper : i16) -> bool {
 // use a < for an inclusive lower bound and exclusive upper bound
 // use <= for an inclusive lower bound and inclusive upper bound
 // alternatively, if the upper bound is inclusive and you can pre-calculate
@@ -56,9 +56,41 @@ fn fast_between(value : u16, lower : u16, upper : u16) -> bool {
     //let ul = upper-lower;
     //let vnorm = value-upper;
     //if vnorm < ul && < lu
-    (value-lower) as u16 <= (upper - lower)
+    ((value-lower) as u16) as i16 <= (upper - lower)
+}
+
+fn slow_between(value : i16, lower : i16, upper : i16) -> bool {
+    value <= upper && value >= lower
 }
 
 fn sin_lut() {
 
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_benchmark() {
+        //assert!(stringify!(benchmark!{}) contains "let start = Instant::now();");
+        //TODO CHECK FOR VALID OUTPUT
+        assert!(true);
+    }
+    #[test]
+    fn test_benchmark_named() {
+        //assert!(stringify!(benchmark!{}) contains "let start = Instant::now();");
+        //TODO CHECK FOR VALID OUTPUT
+        assert!(true);
+    }
+    #[test]
+    fn fast_between_is_correct() {
+        for x in -10..10 {
+            let fast = fast_between(x, -4, 4);
+            let slow = slow_between(x, -4, 4);
+
+            assert_eq!(fast, slow, "fast_between failed at x = `{}` fast: `{}` slow: `{}`", x, fast, slow);
+        }
+    }
 }
