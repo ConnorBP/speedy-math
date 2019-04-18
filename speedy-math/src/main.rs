@@ -6,7 +6,7 @@
 benchmark_macros = { version = "*", path = "../benchmark" }
 */
 
-use std::time::{Duration, Instant};
+use std::time::{Instant};
 /* 
 use proc_macro::{Literal, Span, Ident, TokenStream, TokenTree};
 use proc_macro::quote; */
@@ -22,7 +22,7 @@ use proc_macro::quote; */
 
 //use benchmark_macros::benchmark2;
 
-macro_rules! benchmark1 {
+macro_rules! benchmark {
     ($($lines:stmt;)*) => {
         let start = Instant::now();
         $($lines;)*
@@ -30,18 +30,21 @@ macro_rules! benchmark1 {
         println!("Benchmark time: {:?}", duration);
     };
 }
-
-/* macro_rules! benchmark3 {
+//#[$($outer:meta) ?]
+macro_rules! namedbenchmark {
     (
-        $(#[$outer:meta])*
-        $($lines:stmt;)*
+        #[$($name:ident)?]
+        $(
+            $(#[$inner:ident $($args:tt)*])*
+            $lines:stmt;
+        )*
     ) => {
             let start = Instant::now();
             $($lines;)*
             let duration = start.elapsed();
-            println!("{} time: {:?}", #[meta], duration);
+            println!("{} time: {:?} | {}", stringify!($($name)?), duration, stringify!(args));
         };
-} */
+}
 
 fn main() {
     
@@ -50,21 +53,22 @@ fn main() {
         println!("Is it in between? {}.", if fast_between(0, -1, 1) {"Yes"} else {"No"});
     } */
 
-    benchmark1! {
+    benchmark! {
         println!("omaewamou SHINDEIRUUUUUU! {}", 999999999);
         println!("NANI!?!?!?!?");
     }
 
-  /*   benchmark3! {
+    namedbenchmark! {
+        #[weeeeeeee]
         println!("OwO notices 🚀");
         println!("the yeet was yote.");
-    } */
+    }
 
-    /* benchmark1! {{
+/*     benchmark2! {
         //run codein here
         println!("I am hard to run! :D");
         println!("yeet");
-    }} */
+    } */
 }
 
 
