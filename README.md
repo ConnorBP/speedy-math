@@ -9,6 +9,7 @@
 ## Details
 
 ![Travis Build Status](https://travis-ci.com/ConnorBP/speedy-math.svg?token=oPv5RhN5awEXsvyyCgSk&branch=master)
+[![codecov](https://codecov.io/gh/ConnorBP/speedy-math/branch/master/graph/badge.svg)](https://codecov.io/gh/ConnorBP/speedy-math)
 
 - Coded in `rust-lang`
 - compiled on `rust stable 2018 edition`

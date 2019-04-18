@@ -14,8 +14,8 @@ env:
     - CRATE_NAME=speedy-math
 
 matrix:
-  # allow_failures:
-  #   - rust: nightly
+  allow_failures:
+    - rust: nightly
   fast_finish: true
 
   # The platforms to build against
