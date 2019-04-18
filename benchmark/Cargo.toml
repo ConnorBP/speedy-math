@@ -1,0 +1,13 @@
+[package]
+name = "benchmark_macros"
+version = "0.1.0"
+authors = ["Connor Postma <connor.postma@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+syn = {version="0.15.32", features=["full"]}
+quote = "0.6.12"
+
+[lib]
+name = "benchmark_macros"
+proc-macro = true
