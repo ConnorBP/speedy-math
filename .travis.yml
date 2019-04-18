@@ -1,10 +1,19 @@
 language: rust
-rust:
-  - stable
-  - beta
-  - nightly
+cache: cargo
+jobs:
+  include:
+    - stage: tests
+      cargo test --verbose
+    - stage: stable
+      rust:
+        - stable
+    - stage: beta
+      rust:
+        - beta
+    - stage: nightly
+      rust:
+        - nightly
 matrix:
   allow_failures:
-    - rust: nightly
+    - stage: nightly
   fast_finish: true
-cache: cargo
