@@ -13,7 +13,8 @@ jobs:
     - stage: nightly
       rust:
         - nightly
+env: # important!
 matrix:
   allow_failures:
-    - stage: nightly
+    - rust: nightly
   fast_finish: true
