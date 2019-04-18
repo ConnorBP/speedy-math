@@ -14,7 +14,7 @@
 - compiled on `rust stable 2018 edition`
 - ~~re-usable as a math library~~ ***TODO***
 - built in speed tests
-- ~~speed tests re-usable as library~~ ***TODO***
+- speed tests re-usable as library (see [benchme](https://crates.io/crates/benchme/0.1.0))
 
 ## output example
 
