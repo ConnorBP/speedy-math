@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "benchmark",
+    "benchme",
     "speedy-math",
 ]
 exclude = [
