@@ -1,10 +1,10 @@
 #build script for rust seperated into tests and build stages
 #referenced materials:
-  # https://docs.travis-ci.com/user/languages/rust/
-  # https://github.com/japaric/trust/blob/master/.travis.yml
-  # https://github.com/roblabla/cargo-travis/blob/master/.travis.yml
-  # https://docs.travis-ci.com/user/build-stages/#how-to-define-build-stages
-  # https://dev.to/cad97/great-rust-ci-1fk6
+# https://docs.travis-ci.com/user/languages/rust/
+# https://github.com/japaric/trust/blob/master/.travis.yml
+# https://github.com/roblabla/cargo-travis/blob/master/.travis.yml
+# https://docs.travis-ci.com/user/build-stages/#how-to-define-build-stages
+# https://dev.to/cad97/great-rust-ci-1fk6
 
 language: rust
 sudo: required
@@ -13,38 +13,9 @@ env:
   global:
     - CRATE_NAME=speedy-math
 
-
-jobs:
-  include:
-    - stage: "Tests"                # naming the Tests stage
-      name: "Clippy and Formatting"            # names the first Tests stage job
-      before_script:
-        - rustup component add rustfmt-preview
-        - cargo install clippy
-      script: cargo fmt -- --check; cargo clippy -- -D clippy::all
-    - script: cargo test --verbose
-      name: "Running Tests"     # names the second Tests stage job
-    - stage: build
-      name: "Build"
-    before_script:
-      - |
-          cargo install &&
-          export PATH=$HOME/.cargo/bin:$PATH
-      - rustup self update
-      script:
-        - |
-            cargo build &&
-            cargo bench &&
-            cargo doc
-stages:
-  - build
-  - test
-#  - name: deploy
-#    if: branch = master
-
 matrix:
-  allow_failures:
-    - rust: nightly
+  # allow_failures:
+  #   - rust: nightly
   fast_finish: true
 
   # The platforms to build against
@@ -97,3 +68,31 @@ cache: cargo
 before_cache:
   # Travis can't cache files that are not readable by "others"
   - chmod -R a+r $HOME/.cargo
+
+jobs:
+  include:
+    - stage: "Tests"                # naming the Tests stage
+      name: "Clippy and Formatting"            # names the first Tests stage job
+      before_script:
+        - rustup component add rustfmt-preview
+        - cargo install clippy
+      script: cargo fmt -- --check; cargo clippy -- -D clippy::all
+    - script: cargo test --verbose
+      name: "Running Tests"     # names the second Tests stage job
+    - stage: build
+      name: "Build"
+      before_script:
+        - |
+            cargo install &&
+            export PATH=$HOME/.cargo/bin:$PATH
+        - rustup self update
+      script:
+        - |
+            cargo build &&
+            cargo bench &&
+            cargo doc
+stages:
+  - build
+  - test
+#  - name: deploy
+#    if: branch = master
