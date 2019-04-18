@@ -8,6 +8,8 @@
 
 ## Details
 
+![Travis Build Status](https://travis-ci.com/ConnorBP/speedy-math.svg?token=oPv5RhN5awEXsvyyCgSk&branch=master)
+
 - Coded in `rust-lang`
 - compiled on `rust stable 2018 edition`
 - ~~re-usable as a math library~~ ***TODO***
